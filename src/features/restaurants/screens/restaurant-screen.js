@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import {
   StatusBar,
@@ -7,20 +7,17 @@ import {
   Text,
   View,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
-import { Searchbar, ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 import styled from "styled-components/native";
 import RestaurantInfoCard from "../components/restaurant-info-components";
 import { SafeArea } from "../../../components/safe-area";
 import { RestaurantsContext } from "../../../services/restaurant/restaurant.context";
-
-const SearchBarContainer = styled.View`
-  background-color: ${(props) => props.theme.colors.ui.tertiary};
-  padding: ${(props) => props.theme.space[3]};
-`;
+import SearchComponent from "../components/search.component";
 
 const Spinner = styled(ActivityIndicator)`
-  flex: 1;
+  flex: 0.3;
   background-color: ${(props) => props.theme.colors.ui.tertiary};
   justify-content: center;
   align-items: center;
@@ -32,17 +29,19 @@ const RestaurantCardList = styled(FlatList)`
   padding: ${(props) => props.theme.space[3]};
 `;
 
-const RestaurantScreen = () => {
-  const {restaurants, isLoading, isError} = useContext(RestaurantsContext)
+const RestaurantScreen = ({ navigation }) => {
+  const { restaurants, isLoading, isError } = useContext(RestaurantsContext);
   return (
     <>
-      <SearchBarContainer>
-        <Searchbar placeholder="Search" />
-      </SearchBarContainer>
-      {isLoading && (<Spinner animating={true} size='large' color='tomato' />)}
+      <SearchComponent />
+      {isLoading && <Spinner animating={true} size="large" color="tomato" />}
       <RestaurantCardList
         data={restaurants}
-        renderItem={({item}) => <RestaurantInfoCard restaurant={item}/>}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => navigation.navigate('RestaurantDetail', {restaurant: item})}>
+            <RestaurantInfoCard restaurant={item} />
+          </TouchableOpacity>
+        )}
         keyExtractor={(item) => item.name}
       />
       <ExpoStatusBar style="auto" />
