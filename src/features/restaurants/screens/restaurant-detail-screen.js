@@ -7,9 +7,11 @@ const RestaurantDetailScreen = ({ route }) => {
   const { restaurant } = route.params;
   return (
     <>
-      <RestaurantInfoCard restaurant={restaurant} />
+      <RestaurantInfoCard 
+      restaurant={restaurant}
+      />
       <ScrollView>
-        <List.Section>
+        <List.Section title="Menu">
           <List.Accordion
             title="Food"
             theme={{ colors: { primary: 'tomato' }}}

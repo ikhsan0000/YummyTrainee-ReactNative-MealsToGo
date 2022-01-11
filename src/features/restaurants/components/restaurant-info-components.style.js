@@ -5,7 +5,7 @@ import { View } from "react-native";
 import { SvgXml } from "react-native-svg";
 
 export const RestaurantCard = styled(Card)`
-  background-color: ${(props) => props.theme.colors.ui.tertiary};
+  background-color: ${(props) => props.theme.colors.ui.secondary};
   elevation: 5;
 `;
 

@@ -23,15 +23,19 @@ padding: 10px
 align-items: center;
 `;
 
-const isAndroid = Platform.OS === "android";
+const CaptionText = styled(Text)`
+margin-top: 10px;
+`;
 
-export const CompactRestaurantInfo = ({ restaurant }) => {
-  const Image = isAndroid ? CompactWebView : CompactImage
+
+export const CompactRestaurantInfo = ({ restaurant, isMap }) => {
+  const isAndroid = Platform.OS === "android";
+  const Image = isAndroid && isMap ? CompactWebView : CompactImage
   return (
     <>
       <Item>
         <Image source={{ uri: restaurant.photos[0] }} />
-        <Text variants="caption">{restaurant.name}</Text>
+        <CaptionText variant="caption">{restaurant.name}</CaptionText>
       </Item>
     </>
   );

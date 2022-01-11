@@ -13,6 +13,7 @@ import {
   FlexRowContainer,
 } from "./restaurant-info-components.style";
 import { Spacer } from "../../../components/spacer/spacer.component";
+import { FavouriteIcon } from "../../../components/favourites/favourite.component";
 
 const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
@@ -33,6 +34,7 @@ const RestaurantInfoCard = ({ restaurant = {} }) => {
   return (
     <Spacer position="bottom" size="large">
       <RestaurantCard>
+        <FavouriteIcon restaurant={restaurant}/>
         <Card.Cover source={{ uri: photos[0] }} />
 
         <Card.Content>

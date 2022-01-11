@@ -1,5 +1,8 @@
+import React, { useState, useEffect } from "react";
+
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
+import { initializeApp } from "firebase/app";
 
 import {
   useFonts as usePoppins,
@@ -15,9 +18,11 @@ import { restaurantsRequest } from "./src/services/restaurant/restaurant.service
 import { RestaurantsContextProvider } from "./src/services/restaurant/restaurant.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
 import { Navigation } from "./src/infrastructure/navigation";
-
+import { FavouriteContextProvider } from "./src/services/favourites/favourites.context";
+import { AuthenticationContextProvider } from "./src/infrastructure/authentication/authentication.context";
 
 export default function App() {
+
   const [poppinsLoaded] = usePoppins({
     Poppins_400Regular,
     Poppins_700Bold,
@@ -30,17 +35,19 @@ export default function App() {
     return null;
   }
 
-
-
   return (
     <>
       <SafeArea>
         <ThemeProvider theme={theme}>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <Navigation />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
+          <AuthenticationContextProvider>
+            <FavouriteContextProvider>
+              <LocationContextProvider>
+                <RestaurantsContextProvider>
+                  <Navigation />
+                </RestaurantsContextProvider>
+              </LocationContextProvider>
+            </FavouriteContextProvider>
+          </AuthenticationContextProvider>
         </ThemeProvider>
       </SafeArea>
     </>
