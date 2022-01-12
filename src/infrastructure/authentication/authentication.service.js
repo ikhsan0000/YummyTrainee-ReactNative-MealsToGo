@@ -1,6 +1,6 @@
 import React, { useState, createContext } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import { Text, View } from "react-native";
 
 // Initialize Firebase
@@ -18,12 +18,5 @@ initializeApp(firebaseConfig);
 const auth = getAuth();
 
 export const loginRequest = (email, password) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then((user) => {
-      setIsAuthenticated(true);
-      console.log(user);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  return signInWithEmailAndPassword(auth, email, password);
 };

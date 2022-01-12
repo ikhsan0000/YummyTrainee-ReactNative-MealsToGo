@@ -4,12 +4,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { AccountScreen } from "../../features/account/screens/account.screen";
 import { LoginScreen } from "../../features/account/screens/login.screen";
 import { RegisterScreen } from "../../features/account/screens/register.screen";
+import { TransitionPresets } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
 export const AccountNavigator = () => {
   return (
-    <Stack.Navigator headerMode="none">
+    <Stack.Navigator headerMode="none" screenOptions={{...TransitionPresets.ModalSlideFromBottomIOS}}>
       <Stack.Screen
         name="Main"
         component={AccountScreen}
@@ -22,7 +23,7 @@ export const AccountNavigator = () => {
       
       <Stack.Screen
         name="Register"
-        component={RegisterScreenister}
+        component={RegisterScreen}
       />
     </Stack.Navigator>
   );

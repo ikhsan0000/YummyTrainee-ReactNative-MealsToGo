@@ -15,10 +15,8 @@ import {
 } from "@expo-google-fonts/inter";
 import { SafeArea } from "./src/components/safe-area";
 import { restaurantsRequest } from "./src/services/restaurant/restaurant.service";
-import { RestaurantsContextProvider } from "./src/services/restaurant/restaurant.context";
-import { LocationContextProvider } from "./src/services/location/location.context";
+
 import { Navigation } from "./src/infrastructure/navigation";
-import { FavouriteContextProvider } from "./src/services/favourites/favourites.context";
 import { AuthenticationContextProvider } from "./src/infrastructure/authentication/authentication.context";
 
 export default function App() {
@@ -40,13 +38,9 @@ export default function App() {
       <SafeArea>
         <ThemeProvider theme={theme}>
           <AuthenticationContextProvider>
-            <FavouriteContextProvider>
-              <LocationContextProvider>
-                <RestaurantsContextProvider>
+  
                   <Navigation />
-                </RestaurantsContextProvider>
-              </LocationContextProvider>
-            </FavouriteContextProvider>
+           
           </AuthenticationContextProvider>
         </ThemeProvider>
       </SafeArea>

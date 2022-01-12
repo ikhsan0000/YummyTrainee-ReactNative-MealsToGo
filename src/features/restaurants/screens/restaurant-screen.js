@@ -17,6 +17,7 @@ import { RestaurantsContext } from "../../../services/restaurant/restaurant.cont
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import SearchComponent from "../components/search.component";
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
+import { FadeInView } from "../../../components/animations/fade.animation";
 
 const Spinner = styled(ActivityIndicator)`
   flex: 0.3;
@@ -25,7 +26,7 @@ const Spinner = styled(ActivityIndicator)`
   align-items: center;
 `;
 
-const RestaurantCardList = styled(FlatList)`
+export const RestaurantCardList = styled(FlatList)`
   flex: 1;
   background-color: ${(props) => props.theme.colors.ui.tertiary};
   padding: ${(props) => props.theme.space[3]};
@@ -43,14 +44,16 @@ const RestaurantScreen = ({ navigation }) => {
         onFavouriteToggle={() => setIsToggled(!isToggled)}
       />
 
-      {isToggled && 
-        <FavouritesBar 
-        favourites={favourites}
-        onNavigate = {navigation.navigate}
+      {isToggled && (
+        
+        <FavouritesBar
+          favourites={favourites}
+          onNavigate={navigation.navigate}
         />
-      }
+      )}
 
       {isLoading && <Spinner animating={true} size="large" color="white" />}
+
       <RestaurantCardList
         data={restaurants}
         renderItem={({ item }) => (
@@ -59,7 +62,9 @@ const RestaurantScreen = ({ navigation }) => {
               navigation.navigate("RestaurantDetail", { restaurant: item })
             }
           >
-            <RestaurantInfoCard restaurant={item} />
+            <FadeInView>
+              <RestaurantInfoCard restaurant={item} />
+            </FadeInView>
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item.name}
